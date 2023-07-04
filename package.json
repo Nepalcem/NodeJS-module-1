@@ -19,6 +19,7 @@
     "url": "https://github.com/Nepalcem/NodeJS-module-1/issues"
   },
   "homepage": "https://github.com/Nepalcem/NodeJS-module-1#readme",
+  "type": "commonjs",
   "devDependencies": {
     "nodemon": "^2.0.22"
   }
