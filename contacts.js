@@ -1,9 +1,10 @@
 const path = require("path");
 const fs = require("fs").promises;
 
+const contactsPath = path.join("db", "contacts.json");
+
 const listContacts = async () => {
   try {
-    const contactsPath = path.join("db", "contacts.json");
     const readResult = await fs.readFile(contactsPath, "utf8");
     return JSON.parse(readResult);
   } catch (error) {
@@ -35,9 +36,23 @@ const removeContact = async (contactId) => {
   const indexOfElement = contactsArray.indexOf(element);
   const deletedElement = contactsArray.splice(indexOfElement, 1);
 
-  const contactsPath = path.join("db", "contacts.json");
-  fs.writeFile(contactsPath, JSON.stringify(contactsArray), "utf8");
+  await fs.writeFile(contactsPath, JSON.stringify(contactsArray), "utf8");
   return deletedElement;
 };
 
-removeContact("AeHIrLTr6JkxGE6SN-0Rw");
+const addContact = async (name, email, phone) => {
+  const contactsArray = await listContacts();
+  const { nanoid } = await import("nanoid");
+  const newContact = {
+    id: nanoid(),
+    name,
+    email,
+    phone,
+  };
+  const newContactsArray = [...contactsArray, newContact];
+  console.log(newContactsArray);
+  await fs.writeFile(contactsPath, JSON.stringify(newContactsArray), "utf8");
+  return newContact;
+};
+
+// addContact('test', 'test@test.com', "(692) 802-2949");
