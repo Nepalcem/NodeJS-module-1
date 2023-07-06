@@ -2,11 +2,11 @@ const contacts = require("./contacts");
 const { program } = require("commander");
 
 program
-  .option("--action <type>")
-  .option("--id <type>")
-  .option("--name <type>")
-  .option("--email <type>")
-  .option("--phone <type>");
+  .option("-a, --action <type>")
+  .option("-i, --id <type>")
+  .option("-n, --name <type>")
+  .option("-e, --email <type>")
+  .option("-p, --phone <type>");
 
 program.parse(process.argv);
 
